@@ -1,38 +1,59 @@
-import Vue from "vue";
-import { IonicVueRouter } from "@ionic/vue";
+import Vue from 'vue';
+import { IonicVueRouter } from '@ionic/vue';
 
 Vue.use(IonicVueRouter);
 
 export default new IonicVueRouter({
-  base: "/",
+  base: '/',
   routes: [
     {
-      path: "/root",
-      component: () => import("@/views/TabRoot.vue"),
+      path: '/root',
+      component: () => import('@/views/TabRoot.vue'),
       children: [
         {
-          path: "tab1",
-          name: "tab1",
+          path: 'home',
+          name: 'home',
           components: {
-            tab1Route: () => import("@/views/Tab1.vue"),
-          },
+            homeRoute: () => import('@/views/Home.vue')
+          }
         },
         {
-          path: "tab1/details",
-          name: "tab1-details",
+          path: 'home/details',
+          name: 'details',
           components: {
-            tab1Route: () => import("@/views/Tab1Details.vue"),
-          },
+            homeRoute: () => import('@/views/Details.vue')
+          }
         },
         {
-          path: "tab2",
-          name: "tab2",
+          path: 'discover',
+          name: 'discover',
           components: {
-            tab2Route: () => import("@/views/Tab2.vue"),
-          },
+            discoverRoute: () => import('@/views/Discover.vue')
+          }
         },
-      ],
+        {
+          path: 'discover/popular',
+          name: 'popular',
+          components: {
+            discoverRoute: () => import('@/views/Popular.vue')
+          }
+        },
+        {
+          path: 'discover/search',
+          name: 'search',
+          components: {
+            discoverRoute: () => import('@/views/Search.vue')
+          }
+        },
+        {
+          path: 'wishlist',
+          name: 'wishlist',
+          components: {
+            wishlistRoute: () => import('@/views/Wishlist.vue')
+          }
+        }
+      ]
     },
-    { path: "/", redirect: "root/tab1" },
-  ],
+    { path: '/', redirect: 'root/home' }
+  ]
 });

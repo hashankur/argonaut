@@ -1,39 +1,16 @@
-# ionic-tabs
+# Argonaut
 
-Updated December 22, 2019 to work with latest version of @ionic/vue
+## Todo
 
-### Other Ionic Vue Samples
-- https://github.com/aaronksaunders/ionic4-vue-tabs
-- https://github.com/aaronksaunders/icon-vue
-- https://github.com/aaronksaunders/ionic-vue-picker-sample
-- https://github.com/aaronksaunders/vue-ionic-demo
-- https://github.com/aaronksaunders/capacitor-vue-ionicv4-app
-
-### Sample Overview
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
-
-### Compiles and minifies for production
-```
-yarn run build
-```
-
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
+- Placeholder images for missing items
+- Keep state of home grid
+- Ion split menu (Grab a boilerplate. Maybe?)
+- Version through Firebase
+- ts/vue-property-controller stuff
+- Why is one working in hamburger?
+- Buttons not work?
+- contentId?
 
 ### Customize configuration
+
 See [Configuration Reference](https://cli.vuejs.org/config/).

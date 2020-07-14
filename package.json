@@ -1,5 +1,5 @@
 {
-  "name": "ionic-tabs",
+  "name": "argonaut",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,6 +11,7 @@
     "@ionic/core": "^5.1.1",
     "@ionic/vue": "0.0.9",
     "core-js": "^2.6.5",
+    "eslint": "5.16.0",
     "ionicons": "^4.6.3",
     "vue": "2.6.11",
     "vue-router": "3.2.0"
@@ -19,9 +20,12 @@
     "@vue/cli-plugin-babel": "^3.8.0",
     "@vue/cli-plugin-eslint": "^3.8.0",
     "@vue/cli-service": "^3.8.0",
+    "@vue/eslint-config-prettier": "^6.0.0",
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.16.0",
+    "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-vue": "^5.0.0",
+    "global": "^4.4.0",
+    "prettier": "^2.0.5",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
@@ -31,7 +35,8 @@
     },
     "extends": [
       "plugin:vue/essential",
-      "eslint:recommended"
+      "eslint:recommended",
+      "@vue/prettier"
     ],
     "rules": {},
     "parserOptions": {

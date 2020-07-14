@@ -1,4 +1,3 @@
-    
 <template>
   <div class="ion-page">
     <ion-header>
@@ -6,7 +5,7 @@
         <ion-buttons slot="start">
           <ion-back-button default-href="/"></ion-back-button>
         </ion-buttons>
-        <ion-title>Ionic4 VueJS: Tab 1 Details</ion-title>
+        <ion-title>Popular Movies</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content padding>
@@ -17,16 +16,14 @@
 
 <script>
 export default {
-  name: "tab1Details",
+  name: 'Popular',
   methods: {
     nextPage() {
-      this.$router.push("/geo-location-page");
+      this.$router.push('/geo-location-page');
     }
   },
-  onCreate() {
-  }
+  onCreate() {}
 };
 </script>
 
-<style>
-</style>
+<style></style>

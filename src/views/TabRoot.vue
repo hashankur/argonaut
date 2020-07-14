@@ -1,23 +1,36 @@
 <template>
   <div class="ion-page">
     <ion-tabs>
-      <ion-tab tab="tab1" :routes="['tab1', 'tab1-details']" :to="{name:'tab1'}">
-        <ion-vue-router name="tab1Route"></ion-vue-router>
+      <ion-tab tab="home" :routes="['home', 'details']" :to="{ name: 'home' }">
+        <ion-vue-router name="homeRoute"></ion-vue-router>
       </ion-tab>
 
-      <ion-tab tab="tab2">
-        <ion-vue-router name="tab2Route"></ion-vue-router>
+      <ion-tab
+        tab="discover"
+        :routes="['discover', 'popular', 'search']"
+        :to="{ name: 'discover' }"
+      >
+        <ion-vue-router name="discoverRoute"></ion-vue-router>
       </ion-tab>
 
-      <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="tab1">
-          <ion-icon name="contacts" />
-          <ion-label>Tab 1</ion-label>
+      <ion-tab tab="wishlist">
+        <ion-vue-router name="wishlistRoute"></ion-vue-router>
+      </ion-tab>
+
+      <ion-tab-bar slot="bottom" color="dark">
+        <ion-tab-button tab="home">
+          <ion-icon name="home" />
+          <ion-label>Home</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="tab2" :to="{name:'tab2'}"> 
-          <ion-icon name="map" />
-          <ion-label>Tab 2</ion-label>
+        <ion-tab-button tab="discover" :to="{ name: 'discover' }">
+          <ion-icon name="compass" />
+          <ion-label>Discover</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="wishlist" :to="{ name: 'wishlist' }">
+          <ion-icon name="list-box" />
+          <ion-label>Wishlist</ion-label>
         </ion-tab-button>
       </ion-tab-bar>
     </ion-tabs>
@@ -25,18 +38,32 @@
 </template>
 
 <script>
-import { contacts, map } from "ionicons/icons";
-import { addIcons } from "ionicons";
-// import Tab1 from "./Tab1";
-// import Tab2 from "./Tab2";
+import {
+  home,
+  compass,
+  listBox,
+  search,
+  add,
+  checkmarkCircleOutline
+} from 'ionicons/icons';
+import { addIcons } from 'ionicons';
+
 addIcons({
-  "ios-contacts": contacts.ios,
-  "md-contacts": contacts.md,
-  "ios-map": map.ios,
-  "md-map": map.md
+  'ios-home': home.ios,
+  'md-home': home.md,
+  'ios-list-box': listBox.ios,
+  'md-list-box': listBox.md,
+  'ios-compass': compass.ios,
+  'md-compass': compass.md,
+  'ios-add': add.ios,
+  'md-add': add.md,
+  'ios-search': search.ios,
+  'md-search': search.md,
+  'ios-checkmark-circle-outline ': checkmarkCircleOutline.ios,
+  'md-checkmark-circle-outline': checkmarkCircleOutline.md
 });
 export default {
-  name: "TabRoot",
+  name: 'TabRoot',
   props: {}
 };
 </script>

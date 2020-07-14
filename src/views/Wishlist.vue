@@ -1,0 +1,39 @@
+<template>
+  <div class="ion-page" id="tab2">
+    <ion-header>
+      <ion-toolbar color="dark">
+        <ion-title>Wishlist</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button>
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <ion-content padding>
+      <ion-list>
+        <ion-item-sliding>
+          <ion-item>
+            <ion-label>New Trendy Movie</ion-label>
+          </ion-item>
+
+          <ion-item-options side="start">
+            <ion-item-option color="primary">Remind</ion-item-option>
+          </ion-item-options>
+
+          <ion-item-options side="end">
+            <ion-item-option color="danger">Delete</ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </ion-content>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'Wishlist'
+};
+</script>
+
+<style></style>
