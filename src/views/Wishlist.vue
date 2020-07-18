@@ -2,6 +2,15 @@
   <div class="ion-page" id="tab2">
     <ion-header>
       <ion-toolbar color="dark">
+        <ion-buttons slot="start">
+          <ion-menu-button auto-hide="false"></ion-menu-button>
+        </ion-buttons>
+        <ion-buttons slot="primary">
+          <ion-button @click="routerSearch">
+            <ion-icon slot="icon-only" name="search"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+
         <ion-title>Wishlist</ion-title>
       </ion-toolbar>
     </ion-header>
@@ -32,7 +41,12 @@
 
 <script>
 export default {
-  name: 'Wishlist'
+  name: 'Wishlist',
+  methods: {
+    routerSearch() {
+      this.$router.push({ name: 'search' });
+    }
+  }
 };
 </script>
 

@@ -1,30 +1,34 @@
 <template>
   <div>
-    <ion-fab vertical="top" horizontal="end">
-      <ion-fab-button>
-        <ion-icon name="share"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
     <ion-img
       :src="'https://image.tmdb.org/t/p/w300' + movieShow.backdrop_path"
     ></ion-img>
     <div class="ion-padding">
-      <div class="topBox">
+      <div>
         <ion-text color="primary">
           <h1>
             {{ movieShow.title }}
           </h1>
-          <span> {{ movieShow.release_date | year }} </span>
-          <span> {{ movieShow.vote_average }} </span>
-          <span>
-            {{ movieShow.original_language.toUpperCase() }}
-          </span>
+          <span> {{ movieShow.release_date | year }} </span> &bull;
+          <span> {{ movieShow.original_language.toUpperCase() }} </span>
+          &bull; <span> {{ movieShow.vote_average }} </span> &#9733;
         </ion-text>
-        <br />
+        <hr />
+        <ion-button fill="clear" @click="clickYoutube">
+          <ion-icon slot="icon-only" name="logo-youtube"></ion-icon>
+          <span> &nbsp; Trailer </span>
+        </ion-button>
+        <ion-button fill="clear" @click="onClick()">
+          <ion-icon slot="icon-only" name="share"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" @click="onClick()">
+          <ion-icon slot="icon-only" name="checkmark-circle-outline"></ion-icon>
+        </ion-button>
+        <hr />
         <ion-label> {{ movieShow.overview }} </ion-label>
         <p>{{ movieShow.genre_ids }}</p>
       </div>
-      <div class="reviews">
+      <div>
         <ion-text color="tertiary">
           <h1>Reviews</h1>
         </ion-text>
@@ -53,7 +57,10 @@
 export default {
   data() {
     return {
-      movieShow: []
+      movieShow: [],
+      youtube: [],
+      ytQuery: null,
+      trailerUrlPath: null
     };
   },
   props: {
@@ -62,6 +69,34 @@ export default {
   },
   created() {
     this.movieShow = this.$route.params.selectedMovie;
+  },
+  methods: {
+    clickYoutube() {
+      this.ytQuery = this.movieShow.title;
+      this.ytQuery.replace(/\s+/g, '+').toLowerCase();
+
+      fetch(
+        'https://www.googleapis.com/youtube/v3/search?part=id&q=trailer+' +
+          this.ytQuery +
+          '&type=video&fields=items%2Fid&key=' +
+          process.env.VUE_APP_YOUTUBE
+      )
+        .then((response) => response.json()) // one extra step
+        .then((data) => {
+          this.youtube = data.items; // Bcz, JSON gives data from the 'items' array
+          this.trailerUrlPath =
+            'www.youtube.com/watch?v=' + this.youtube[0].id.videoId;
+
+          if (/Android/i.test(navigator.userAgent)) {
+            // If the user is using an Android device.
+            window.location = 'vnd.youtube://' + this.trailerUrlPath;
+          } else {
+            window.location = 'https://' + this.trailerUrlPath;
+          }
+        })
+        // eslint-disable-next-line
+        .catch((error) => console.error(error));
+    }
   },
   filters: {
     year: function (value) {
@@ -72,5 +107,3 @@ export default {
   }
 };
 </script>
-
-<style></style>

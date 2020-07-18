@@ -1,15 +1,10 @@
 <template>
   <div>
-    <ion-fab vertical="top" horizontal="end">
-      <ion-fab-button>
-        <ion-icon name="share"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
     <ion-img
       :src="'https://image.tmdb.org/t/p/w300' + tvShow.backdrop_path"
     ></ion-img>
     <div class="ion-padding">
-      <div class="topBox">
+      <div>
         <ion-text color="primary">
           <h1>
             {{ tvShow.name }}
@@ -24,7 +19,7 @@
         <ion-label> {{ tvShow.overview }} </ion-label>
         <p>{{ tvShow.genre_ids }}</p>
       </div>
-      <div class="reviews">
+      <div>
         <ion-text color="tertiary">
           <h1>Reviews</h1>
         </ion-text>
@@ -66,5 +61,3 @@ export default {
   }
 };
 </script>
-
-<style></style>

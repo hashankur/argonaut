@@ -2,7 +2,7 @@
   <div class="ion-page" id="tab1">
     <ion-header>
       <ion-toolbar color="dark">
-        <ion-title>Filmroll</ion-title>
+        <ion-title style="text-align: center;">Filmroll</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content padding color="dark">

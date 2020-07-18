@@ -55,7 +55,6 @@ export default {
       people: []
     };
   },
-
   methods: {
     routerSearch() {
       this.$router.push({ name: 'search' });

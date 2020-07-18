@@ -2,6 +2,7 @@
 
 ## Todo
 
+- Selected movie/tv to localstorage to avoid blank pages
 - [Crypt](https://github.com/brix/crypto-js)
 - Lazy load elements
 - Placeholder images for missing items

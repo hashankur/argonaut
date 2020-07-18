@@ -7,7 +7,7 @@ export default new IonicVueRouter({
   base: '/',
   routes: [
     {
-      path: '/root',
+      path: '/argonaut',
       component: () => import('@/views/TabRoot.vue'),
       children: [
         {
@@ -39,21 +39,28 @@ export default new IonicVueRouter({
           }
         },
         {
-          path: 'search',
-          name: 'search',
-          components: {
-            searchRoute: () => import('@/views/Search.vue')
-          }
-        },
-        {
           path: 'wishlist',
           name: 'wishlist',
           components: {
             wishlistRoute: () => import('@/views/Wishlist.vue')
           }
+        },
+        {
+          path: 'people',
+          name: 'people',
+          components: {
+            peopleRoute: () => import('@/views/People.vue')
+          }
+        },
+        {
+          path: 'people/search',
+          name: 'search',
+          components: {
+            peopleRoute: () => import('@/views/Search.vue')
+          }
         }
       ]
     },
-    { path: '/', redirect: 'root/home' }
+    { path: '/', redirect: 'argonaut/home' }
   ]
 });

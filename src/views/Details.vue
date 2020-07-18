@@ -3,15 +3,11 @@
     <ion-header>
       <ion-toolbar color="dark">
         <ion-buttons slot="start">
-          <ion-back-button default-href="/"></ion-back-button>
+          <ion-back-button></ion-back-button>
         </ion-buttons>
         <ion-buttons slot="primary">
           <ion-button>
-            <ion-icon
-              slot="icon-only"
-              name="checkmarkCircleOutline
-"
-            ></ion-icon>
+            <ion-icon slot="icon-only" name="search"></ion-icon>
           </ion-button>
         </ion-buttons>
       </ion-toolbar>
@@ -66,10 +62,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.topBox,
-.reviews {
-  text-align: left;
-}
-</style>
