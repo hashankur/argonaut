@@ -7,10 +7,14 @@
 
       <ion-tab
         tab="discover"
-        :routes="['discover', 'popular', 'search']"
+        :routes="['discover', 'popular']"
         :to="{ name: 'discover' }"
       >
         <ion-vue-router name="discoverRoute"></ion-vue-router>
+      </ion-tab>
+
+      <ion-tab tab="search">
+        <ion-vue-router name="searchRoute"></ion-vue-router>
       </ion-tab>
 
       <ion-tab tab="wishlist">
@@ -26,6 +30,11 @@
         <ion-tab-button tab="discover" :to="{ name: 'discover' }">
           <ion-icon name="compass" />
           <ion-label>Discover</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="search" :to="{ name: 'search' }">
+          <ion-icon name="search" />
+          <ion-label>Search</ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="wishlist" :to="{ name: 'wishlist' }">
@@ -44,7 +53,10 @@ import {
   listBox,
   search,
   add,
-  checkmarkCircleOutline
+  share,
+  checkmarkCircleOutline,
+  film,
+  tv
 } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 
@@ -59,8 +71,14 @@ addIcons({
   'md-add': add.md,
   'ios-search': search.ios,
   'md-search': search.md,
+  'ios-share': share.ios,
+  'md-share': share.md,
   'ios-checkmark-circle-outline ': checkmarkCircleOutline.ios,
-  'md-checkmark-circle-outline': checkmarkCircleOutline.md
+  'md-checkmark-circle-outline': checkmarkCircleOutline.md,
+  'ios-tv': tv.ios,
+  'md-tv': tv.md,
+  'ios-film': film.ios,
+  'md-film': film.md
 });
 export default {
   name: 'TabRoot',

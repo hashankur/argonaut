@@ -13,9 +13,9 @@
         <ion-title>Discover</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content padding>
+    <ion-content padding color="dark">
       <ion-list-header>
-        <ion-label>Popular</ion-label>
+        <ion-label>Popular People</ion-label>
         <ion-button fill="clear" size="small" @click="popularExp()">
           See More
         </ion-button>
@@ -29,6 +29,20 @@
           </li>
         </ul>
       </div>
+
+      <ion-list-header>
+        <ion-label>Genres</ion-label>
+        <ion-button fill="clear" size="small" @click="popularExp()">
+          See More
+        </ion-button>
+      </ion-list-header>
+      <div class="app">
+        <ul class="hs full no-scrollbar">
+          <li class="item" v-for="(genre, index) in genres" :key="index">
+            {{ genre.name }}
+          </li>
+        </ul>
+      </div>
     </ion-content>
   </div>
 </template>
@@ -37,7 +51,7 @@
 export default {
   data() {
     return {
-      popular: [],
+      genres: [],
       people: []
     };
   },
@@ -54,6 +68,16 @@ export default {
       .then((response) => response.json()) // one extra step
       .then((data) => {
         this.people = data.results; // Bcz, JSON gives data from the 'genres' array
+      })
+      // eslint-disable-next-line
+      .catch((error) => console.error(error));
+
+    fetch(
+      'https://api.themoviedb.org/3/genre/movie/list?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&language=en-US'
+    )
+      .then((response) => response.json()) // one extra step
+      .then((data) => {
+        this.genres = data.genres; // Bcz, JSON gives data from the 'genres' array
       })
       // eslint-disable-next-line
       .catch((error) => console.error(error));

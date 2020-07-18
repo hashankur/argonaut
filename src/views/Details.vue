@@ -16,33 +16,12 @@
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
-
     <ion-content padding color="dark">
-      <ion-img
-        :src="
-          'https://image.tmdb.org/t/p/w300' + $route.params.trend.backdrop_path
-        "
-      ></ion-img>
-      <div class="ion-padding">
-        <div class="topBox">
-          <ion-text color="primary">
-            <h1 v-if="$route.params.trend.title != ''">
-              {{ $route.params.trend.title }}
-            </h1>
-            <h1 v-if="$route.params.trend.name != ''">
-              {{ $route.params.trend.name }}
-            </h1>
-            <span> {{ $route.params.trend.release_date | year }} </span>
-            <span> {{ $route.params.trend.vote_average }} </span>
-            <span>
-              {{ $route.params.trend.original_language.toUpperCase() }}
-            </span>
-          </ion-text>
-          <br />
-          <ion-label> {{ $route.params.trend.overview }} </ion-label>
-          <p>{{ $route.params.trend.genre_ids }}</p>
-        </div>
-      </div>
+      <component
+        :is="currentComponent"
+        :reviews="reviews"
+        :shorten="shorten"
+      ></component>
     </ion-content>
   </div>
 </template>
@@ -50,20 +29,47 @@
 <script>
 export default {
   name: 'Details',
-  methods: {},
-  filters: {
-    year: function (value) {
-      if (!value) return '';
-      value = value.toString();
-      return value.substring(0, 4);
+  components: {
+    movie: () => import('@/components/MovieDetails'),
+    tv: () => import('@/components/TVDetails')
+  },
+  data() {
+    return {
+      currentComponent: null,
+      reviews: []
+    };
+  },
+  methods: {
+    // Shorten a string to less than maxLen characters without truncating words.
+    shorten(str, maxLen, separator = ' ') {
+      if (str.length <= maxLen) return str;
+      return str.substr(0, str.lastIndexOf(separator, maxLen)) + '...';
     }
+  },
+  created() {
+    this.currentComponent = this.$route.params.type;
+  },
+  mounted() {
+    fetch(
+      'https://api.themoviedb.org/3/' +
+        this.currentComponent +
+        '/' +
+        this.$route.params.id +
+        '/reviews?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&language=en-US&page=1'
+    )
+      .then((response) => response.json()) // one extra step
+      .then((data) => {
+        this.reviews = data.results; // Bcz, JSON gives data from the 'genres' array
+      })
+      // eslint-disable-next-line
+      .catch((error) => console.error(error));
   }
 };
 </script>
 
-<style scoped>
+<style>
 .topBox,
-span {
+.reviews {
   text-align: left;
 }
 </style>

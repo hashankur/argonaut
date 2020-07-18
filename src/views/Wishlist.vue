@@ -10,7 +10,7 @@
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
     </ion-fab>
-    <ion-content padding>
+    <ion-content padding color="dark">
       <ion-list>
         <ion-item-sliding>
           <ion-item>

@@ -23,7 +23,7 @@
             class="item"
             v-for="(upMov, index) in upcoming"
             :key="index"
-            @click="selectedTitle(upMov)"
+            @click="selectedMovie(`${upMov.id}`, upMov)"
           >
             <img :src="'https://image.tmdb.org/t/p/w92' + upMov.poster_path" />
           </li>
@@ -47,7 +47,7 @@
             class="item"
             v-for="(trend, index) in trending"
             :key="index"
-            @click="selectedTitle(trend)"
+            @click="selectedMovie(`${trend.id}`, trend)"
           >
             <img :src="'https://image.tmdb.org/t/p/w92' + trend.poster_path" />
           </li>
@@ -71,7 +71,7 @@
             class="item"
             v-for="(popMov, index) in popularMovies"
             :key="index"
-            @click="selectedTitle(popMov)"
+            @click="selectedMovie(`${popMov.id}`, popMov)"
           >
             <img :src="'https://image.tmdb.org/t/p/w92' + popMov.poster_path" />
           </li>
@@ -95,7 +95,7 @@
             class="item"
             v-for="(popTV, index) in popularTV"
             :key="index"
-            @click="selectedTitle(popTV)"
+            @click="selectedTV(`${popTV.id}`, popTV)"
           >
             <img :src="'https://image.tmdb.org/t/p/w92' + popTV.poster_path" />
           </li>
@@ -120,10 +120,16 @@ export default {
     popularExp() {
       this.$router.push({ name: 'popular' });
     },
-    selectedTitle(trend, upMov, popMov, popTV) {
+    selectedMovie(id, selectedMovie) {
       this.$router.push({
         name: 'details',
-        params: { trend, upMov, popMov, popTV }
+        params: { type: 'movie', id, selectedMovie }
+      });
+    },
+    selectedTV(id, selectedTV) {
+      this.$router.push({
+        name: 'details',
+        params: { type: 'tv', id, selectedTV }
       });
     }
   },

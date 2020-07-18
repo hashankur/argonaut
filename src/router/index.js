@@ -18,7 +18,7 @@ export default new IonicVueRouter({
           }
         },
         {
-          path: 'home/details',
+          path: 'home/:type/:id',
           name: 'details',
           components: {
             homeRoute: () => import('@/views/Details.vue')
@@ -39,10 +39,10 @@ export default new IonicVueRouter({
           }
         },
         {
-          path: 'discover/search',
+          path: 'search',
           name: 'search',
           components: {
-            discoverRoute: () => import('@/views/Search.vue')
+            searchRoute: () => import('@/views/Search.vue')
           }
         },
         {
