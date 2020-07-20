@@ -2,6 +2,8 @@
 
 ## Todo
 
+- search ->> use /href & ion-back button
+- Avoid duplicates in wishlist, by 2nd click remove
 - Selected movie/tv to localstorage to avoid blank pages
 - [Crypt](https://github.com/brix/crypto-js)
 - Lazy load elements
@@ -17,6 +19,15 @@
 ## Stuff?
 
 - Title name: 'Filmroll - Never miss a movie'
+- you can hide that using following:
+
+<img
+  src="my.png"
+  onerror="this.style.display='none'"
+/>
+you can display another image if image not found as follow:
+
+<img src="my.png" onerror="this.src = 'image-not-found.png';" />
 
 ## Done
 

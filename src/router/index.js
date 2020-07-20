@@ -25,6 +25,13 @@ export default new IonicVueRouter({
           }
         },
         {
+          path: 'home/:type/:id/cast&reviews',
+          name: 'cast&Reviews',
+          components: {
+            homeRoute: () => import('@/views/Cast&Reviews.vue')
+          }
+        },
+        {
           path: 'discover',
           name: 'discover',
           components: {
@@ -62,5 +69,12 @@ export default new IonicVueRouter({
       ]
     },
     { path: '/', redirect: 'argonaut/home' }
-  ]
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { x: 0, y: 0 };
+    }
+  }
 });

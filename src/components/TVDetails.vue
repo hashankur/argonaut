@@ -9,15 +9,29 @@
           <h1>
             {{ tvShow.name }}
           </h1>
-          <span> {{ tvShow.release_date | year }} </span>
-          <span> {{ tvShow.vote_average }} </span>
+          <span> {{ tvShow.first_air_date | year }} </span> &bull;
           <span>
             {{ tvShow.original_language.toUpperCase() }}
           </span>
+          &bull; <span> {{ tvShow.vote_average }} </span> &#9733;
         </ion-text>
-        <br />
+        <hr />
+        <ion-button fill="clear" @click="clickYoutube">
+          <ion-icon slot="icon-only" name="logo-youtube"></ion-icon>
+          <span> &nbsp; Trailer </span>
+        </ion-button>
+        <ion-button fill="clear" @click="onClick()">
+          <ion-icon slot="icon-only" name="share"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" @click="addWishlist">
+          <ion-icon slot="icon-only" name="checkmark-circle-outline"></ion-icon>
+        </ion-button>
+        <hr />
         <ion-label> {{ tvShow.overview }} </ion-label>
-        <p>{{ tvShow.genre_ids }}</p>
+        <hr />
+        <ion-chip v-for="(genre, index) in tvShow.genre_ids" :key="index">
+          <ion-label color="primary">{{ getGenre(genre) }}</ion-label>
+        </ion-chip>
       </div>
       <div>
         <ion-text color="tertiary">
@@ -39,10 +53,16 @@
 </template>
 
 <script>
+import genres from '@/data/tvGenres.json';
+
 export default {
   data() {
     return {
-      tvShow: []
+      genres,
+      tvShow: [],
+      youtube: [],
+      ytQuery: null,
+      trailerUrlPath: null
     };
   },
   props: {
@@ -50,7 +70,69 @@ export default {
     shorten: Function
   },
   created() {
-    this.tvShow = this.$route.params.selectedTV;
+    if (localStorage.tvShow.name == this.$route.params.name) {
+      this.tvShow = JSON.parse(localStorage.getItem('tvShow'));
+    } else {
+      this.tvShow = this.$route.params.selectedTV;
+      const parsed = JSON.stringify(this.$route.params.selectedTV);
+      localStorage.setItem('tvShow', parsed);
+    }
+  },
+  methods: {
+    getGenre(value) {
+      return genres.find((genre) => genre.id === value).name;
+    },
+    clickYoutube() {
+      this.ytQuery = this.tvShow.name;
+      this.ytQuery.replace(/\s+/g, '+').toLowerCase();
+
+      fetch(
+        'https://www.googleapis.com/youtube/v3/search?part=id&q=trailer+' +
+          this.ytQuery +
+          '&type=video&fields=items%2Fid&key=' +
+          process.env.VUE_APP_YOUTUBE
+      )
+        .then((response) => response.json()) // one extra step
+        .then((data) => {
+          this.youtube = data.items; // Bcz, JSON gives data from the 'items' array
+          this.trailerUrlPath =
+            'www.youtube.com/watch?v=' + this.youtube[0].id.videoId;
+
+          if (/Android/i.test(navigator.userAgent)) {
+            // If the user is using an Android device.
+            window.location = 'vnd.youtube://' + this.trailerUrlPath;
+          } else {
+            window.location = 'https://' + this.trailerUrlPath;
+          }
+        })
+        // eslint-disable-next-line
+        .catch((error) => console.error(error));
+    },
+    addWishlist() {
+      var existingWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+      if (
+        existingWishlist.find(
+          (existingWishlist) => existingWishlist.name === this.tvShow.name
+        )
+      ) {
+        const toast = document.createElement('ion-toast');
+        toast.message = 'Already in wishlist';
+        toast.duration = 2000;
+        toast.color = 'danger';
+        document.body.appendChild(toast);
+        return toast.present();
+      } else {
+        const addToWishlist = this.tvShow;
+        existingWishlist.push(addToWishlist);
+        localStorage.setItem('wishlist', JSON.stringify(existingWishlist));
+        const toast = document.createElement('ion-toast');
+        toast.message = 'Added to wishlist';
+        toast.duration = 2000;
+        toast.color = 'primary';
+        document.body.appendChild(toast);
+        return toast.present();
+      }
+    }
   },
   filters: {
     year: function (value) {

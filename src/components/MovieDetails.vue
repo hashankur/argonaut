@@ -21,14 +21,20 @@
         <ion-button fill="clear" @click="onClick()">
           <ion-icon slot="icon-only" name="share"></ion-icon>
         </ion-button>
-        <ion-button fill="clear" @click="onClick()">
+        <ion-button fill="clear" @click="addWishlist">
           <ion-icon slot="icon-only" name="checkmark-circle-outline"></ion-icon>
         </ion-button>
         <hr />
         <ion-label> {{ movieShow.overview }} </ion-label>
-        <p>{{ movieShow.genre_ids }}</p>
+        <hr />
+        <ion-chip v-for="(genre, index) in movieShow.genre_ids" :key="index">
+          <ion-label color="primary">{{ getGenre(genre) }}</ion-label>
+        </ion-chip>
       </div>
       <div>
+        <ion-button @click="castReviews">
+          Click me
+        </ion-button>
         <ion-text color="tertiary">
           <h1>Reviews</h1>
         </ion-text>
@@ -54,9 +60,12 @@
 </template>
 
 <script>
+import genres from '@/data/movieGenres.json';
+
 export default {
   data() {
     return {
+      genres,
       movieShow: [],
       youtube: [],
       ytQuery: null,
@@ -68,9 +77,21 @@ export default {
     shorten: Function
   },
   created() {
-    this.movieShow = this.$route.params.selectedMovie;
+    if (localStorage.movieShow.name == this.$route.params.name) {
+      this.movieShow = JSON.parse(localStorage.getItem('movieShow'));
+    } else {
+      this.movieShow = this.$route.params.selectedMovie;
+      const parsed = JSON.stringify(this.$route.params.selectedMovie);
+      localStorage.setItem('movieShow', parsed);
+    }
   },
   methods: {
+    castReviews() {
+      this.$router.push({ name: 'cast&Reviews' });
+    },
+    getGenre(value) {
+      return genres.find((genre) => genre.id === value).name;
+    },
     clickYoutube() {
       this.ytQuery = this.movieShow.title;
       this.ytQuery.replace(/\s+/g, '+').toLowerCase();
@@ -96,6 +117,31 @@ export default {
         })
         // eslint-disable-next-line
         .catch((error) => console.error(error));
+    },
+    addWishlist() {
+      var existingWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+      if (
+        existingWishlist.find(
+          (existingWishlist) => existingWishlist.title === this.movieShow.title
+        )
+      ) {
+        const toast = document.createElement('ion-toast');
+        toast.message = 'Already in wishlist';
+        toast.duration = 2000;
+        toast.color = 'danger';
+        document.body.appendChild(toast);
+        return toast.present();
+      } else {
+        const addToWishlist = this.movieShow;
+        existingWishlist.push(addToWishlist);
+        localStorage.setItem('wishlist', JSON.stringify(existingWishlist));
+        const toast = document.createElement('ion-toast');
+        toast.message = 'Added to wishlist';
+        toast.duration = 2000;
+        toast.color = 'primary';
+        document.body.appendChild(toast);
+        return toast.present();
+      }
     }
   },
   filters: {

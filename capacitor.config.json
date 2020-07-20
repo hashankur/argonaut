@@ -1,0 +1,17 @@
+{
+  "appId": "app.adroit24.argonaut",
+  "appName": "Filmroll",
+  "bundledWebRuntime": false,
+  "npmClient": "yarn",
+  "webDir": "dist",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {},
+  "linuxAndroidStudioPath": "/home/adroit/.local/share/flatpak/app/com.google.AndroidStudio/x86_64/stable/a7e47728c79f10310dda8ede8c31feacf8f1c4b7e05196c1f96f82aaf300d9f5/files/extra/android-studio/bin/studio.sh",
+  "android": {
+    "backgroundColor": "#00000000"
+  }
+}

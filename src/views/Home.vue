@@ -23,7 +23,7 @@
             class="item"
             v-for="(upMov, index) in upcoming"
             :key="index"
-            @click="selectedMovie(`${upMov.id}`, upMov)"
+            @click="selectedMovie(`${upMov.id}`, `${upMov.title}`, upMov)"
           >
             <img :src="'https://image.tmdb.org/t/p/w92' + upMov.poster_path" />
           </li>
@@ -47,7 +47,7 @@
             class="item"
             v-for="(trend, index) in trending"
             :key="index"
-            @click="selectedMovie(`${trend.id}`, trend)"
+            @click="selectedMovie(`${trend.id}`, `${trend.title}`, trend)"
           >
             <img :src="'https://image.tmdb.org/t/p/w92' + trend.poster_path" />
           </li>
@@ -71,7 +71,7 @@
             class="item"
             v-for="(popMov, index) in popularMovies"
             :key="index"
-            @click="selectedMovie(`${popMov.id}`, popMov)"
+            @click="selectedMovie(`${popMov.id}`, `${popMov.title}`, popMov)"
           >
             <img :src="'https://image.tmdb.org/t/p/w92' + popMov.poster_path" />
           </li>
@@ -95,7 +95,7 @@
             class="item"
             v-for="(popTV, index) in popularTV"
             :key="index"
-            @click="selectedTV(`${popTV.id}`, popTV)"
+            @click="selectedTV(`${popTV.id}`, `${popTV.name}`, popTV)"
           >
             <img :src="'https://image.tmdb.org/t/p/w92' + popTV.poster_path" />
           </li>
@@ -120,18 +120,22 @@ export default {
     popularExp() {
       this.$router.push({ name: 'popular' });
     },
-    selectedMovie(id, selectedMovie) {
+    selectedMovie(id, name, selectedMovie) {
       this.$router.push({
         name: 'details',
-        params: { type: 'movie', id, selectedMovie }
+        params: { type: 'movie', id, name, selectedMovie }
       });
     },
-    selectedTV(id, selectedTV) {
+    selectedTV(id, name, selectedTV) {
       this.$router.push({
         name: 'details',
-        params: { type: 'tv', id, selectedTV }
+        params: { type: 'tv', id, name, selectedTV }
       });
     }
+  },
+  created() {
+    localStorage.movieShow = null;
+    localStorage.tvShow = null;
   },
   mounted() {
     fetch(

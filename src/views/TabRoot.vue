@@ -1,7 +1,11 @@
 <template>
   <div class="ion-page">
     <ion-tabs>
-      <ion-tab tab="home" :routes="['home', 'details']" :to="{ name: 'home' }">
+      <ion-tab
+        tab="home"
+        :routes="['home', 'details', 'cast&Reviews']"
+        :to="{ name: 'home' }"
+      >
         <ion-vue-router name="homeRoute"></ion-vue-router>
       </ion-tab>
 

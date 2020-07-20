@@ -1,0 +1,5 @@
+resources/
+├── icon.png
+└── splash.png
+
+$ cordova-res android --skip-config --copy

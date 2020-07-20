@@ -1,0 +1,7 @@
+{
+  "name": "Filmroll",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}

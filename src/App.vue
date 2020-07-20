@@ -7,9 +7,20 @@
 </template>
 
 <script>
+import { Plugins } from '@capacitor/core';
+const { Network } = Plugins;
+
 export default {
   name: 'app',
-  components: {}
+  mounted() {
+    //let handler = Network.addListener('networkStatusChange', (status) => {
+    //  console.log('Network status changed', status);
+    // });
+    // To stop listening:
+    // handler.remove();
+    // Get the current network status
+    //* let status = await Network.getStatus();
+  }
 };
 </script>
 
