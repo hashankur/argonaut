@@ -1,5 +1,7 @@
 # Argonaut
 
+![Android CI](https://github.com/aeonian-adroit24/argonaut/workflows/Android%20CI/badge.svg)
+
 ## Todo
 
 - search ->> use /href & ion-back button
@@ -22,13 +24,12 @@
 - Title name: 'Filmroll - Never miss a movie'
 - you can hide that using following:
 
-<img
-  src="my.png"
-  onerror="this.style.display='none'"
-/>
-you can display another image if image not found as follow:
+```html
+<img src="my.png" onerror="this.style.display='none'" />
+<!-- you can display another image if image not found as follow: -->
 
 <img src="my.png" onerror="this.src = 'image-not-found.png';" />
+```
 
 ## Done
 
