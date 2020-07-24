@@ -17,8 +17,8 @@
         <ion-vue-router name="discoverRoute"></ion-vue-router>
       </ion-tab>
 
-      <ion-tab tab="wishlist">
-        <ion-vue-router name="wishlistRoute"></ion-vue-router>
+      <ion-tab tab="watchlist">
+        <ion-vue-router name="watchlistRoute"></ion-vue-router>
       </ion-tab>
 
       <ion-tab tab="people">
@@ -36,9 +36,9 @@
           <ion-label>Discover</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="wishlist" :to="{ name: 'wishlist' }">
+        <ion-tab-button tab="watchlist" :to="{ name: 'watchlist' }">
           <ion-icon name="list-box" />
-          <ion-label>Wishlist</ion-label>
+          <ion-label>Watchlist</ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="people" :to="{ name: 'people' }">

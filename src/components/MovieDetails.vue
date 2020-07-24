@@ -119,14 +119,14 @@ export default {
     },
     addWishlist() {
       var existingWishlist =
-        JSON.parse(localStorage.getItem('wishlistMov')) || [];
+        JSON.parse(localStorage.getItem('watchlistMov')) || [];
       if (
         existingWishlist.find(
           (existingWishlist) => existingWishlist.title === this.movieShow.title
         )
       ) {
         const toast = document.createElement('ion-toast');
-        toast.message = 'Already in wishlist';
+        toast.message = 'Already in watchlist';
         toast.duration = 2000;
         toast.color = 'danger';
         document.body.appendChild(toast);
@@ -134,9 +134,9 @@ export default {
       } else {
         const addToWishlist = this.movieShow;
         existingWishlist.push(addToWishlist);
-        localStorage.setItem('wishlistMov', JSON.stringify(existingWishlist));
+        localStorage.setItem('watchlistMov', JSON.stringify(existingWishlist));
         const toast = document.createElement('ion-toast');
-        toast.message = 'Added to wishlist';
+        toast.message = 'Added to watchlist';
         toast.duration = 2000;
         toast.color = 'primary';
         document.body.appendChild(toast);

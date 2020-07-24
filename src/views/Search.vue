@@ -13,14 +13,12 @@
     <ion-content padding color="dark">
       <ion-list>
         <ion-item v-for="result in results" :key="result.id">
-          <ion-avatar slot="start">
+          <ion-thumbnail slot="start">
             <img :src="'http://image.tmdb.org/t/p/w92/' + result.poster_path" />
-          </ion-avatar>
+          </ion-thumbnail>
           <ion-label>
-            <h4>{{ result.media_type }}</h4>
             <h2>
-              <ion-icon slot="start" :name="icon"></ion-icon>
-              {{ setIcon(result.title) }}
+              {{ result.title }}
             </h2>
             <p>{{ result.overview }}</p>
           </ion-label>
@@ -40,19 +38,11 @@ export default {
     return {
       query: '',
       results: [],
-      icon: null,
       value: null,
       searchInput: null
     };
   },
   methods: {
-    setIcon(value) {
-      if (value == 'movie') {
-        this.icon = 'film';
-      } else {
-        this.icon = 'tv';
-      }
-    },
     debounce(query, debounceDuration = 300) {
       if (this.timeoutId !== null) {
         clearTimeout(this.timeoutId);

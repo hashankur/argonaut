@@ -46,10 +46,10 @@ export default new IonicVueRouter({
           }
         },
         {
-          path: 'wishlist',
-          name: 'wishlist',
+          path: 'watchlist',
+          name: 'watchlist',
           components: {
-            wishlistRoute: () => import('@/views/Wishlist.vue')
+            watchlistRoute: () => import('@/views/Watchlist.vue')
           }
         },
         {

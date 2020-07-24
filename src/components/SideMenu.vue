@@ -8,7 +8,9 @@
         <ion-item color="dark" href="/">Home</ion-item>
         <ion-item color="dark" href="/category">Categories</ion-item>
         <ion-item color="dark" href="/about">About</ion-item>
-        <ion-item color="dark" href="/settings">Settings</ion-item>
+        <ion-item color="dark" href="/settings">
+          <ion-icon slot="start" name="add"></ion-icon> Settings
+        </ion-item>
       </ion-list>
       <ion-fab vertical="bottom" horizontal="end" slot="fixed">
         <ion-fab-button @click="shareMovie()">
@@ -28,7 +30,7 @@ export default {
   methods: {
     shareMovie() {
       let shareRet = Share.share({
-        text: 'Check out this awesome movie app!',
+        text: 'A simple movie watchlist!',
         url: 'http://adroit24.netlify.app/?ref=argonaut',
         dialogTitle: 'Share with buddies'
       });
