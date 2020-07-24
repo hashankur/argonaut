@@ -30,7 +30,7 @@
         <ion-label> {{ tvShow.overview }} </ion-label>
         <hr />
         <ion-chip v-for="(genre, index) in tvShow.genre_ids" :key="index">
-          <ion-label color="primary">{{ getGenre(genre) }}</ion-label>
+          <ion-label color="light">{{ getGenre(genre) }}</ion-label>
         </ion-chip>
       </div>
       <div>
@@ -109,7 +109,8 @@ export default {
         .catch((error) => console.error(error));
     },
     addWishlist() {
-      var existingWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+      var existingWishlist =
+        JSON.parse(localStorage.getItem('wishlistTV')) || [];
       if (
         existingWishlist.find(
           (existingWishlist) => existingWishlist.name === this.tvShow.name
@@ -124,7 +125,7 @@ export default {
       } else {
         const addToWishlist = this.tvShow;
         existingWishlist.push(addToWishlist);
-        localStorage.setItem('wishlist', JSON.stringify(existingWishlist));
+        localStorage.setItem('wishlistTV', JSON.stringify(existingWishlist));
         const toast = document.createElement('ion-toast');
         toast.message = 'Added to wishlist';
         toast.duration = 2000;

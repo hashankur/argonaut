@@ -18,6 +18,7 @@
 
 ## Stuff?
 
+- IOS support? --> codemagic
 - Title name: 'Filmroll - Never miss a movie'
 - you can hide that using following:
 

@@ -15,22 +15,6 @@
     </ion-header>
     <ion-content padding color="dark">
       <ion-list-header>
-        <ion-label>Popular People</ion-label>
-        <ion-button fill="clear" size="small" @click="popularExp()">
-          See More
-        </ion-button>
-      </ion-list-header>
-      <div class="app">
-        <ul class="hs full no-scrollbar">
-          <li class="item" v-for="(person, index) in people" :key="index">
-            <img
-              :src="'https://image.tmdb.org/t/p/w45' + person.profile_path"
-            />
-          </li>
-        </ul>
-      </div>
-
-      <ion-list-header>
         <ion-label>Genres</ion-label>
         <ion-button fill="clear" size="small" @click="popularExp()">
           See More
@@ -51,8 +35,7 @@
 export default {
   data() {
     return {
-      genres: [],
-      people: []
+      genres: []
     };
   },
   methods: {
@@ -61,16 +44,6 @@ export default {
     }
   },
   mounted() {
-    fetch(
-      'https://api.themoviedb.org/3/person/popular?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&language=en-US&page=1'
-    )
-      .then((response) => response.json()) // one extra step
-      .then((data) => {
-        this.people = data.results; // Bcz, JSON gives data from the 'genres' array
-      })
-      // eslint-disable-next-line
-      .catch((error) => console.error(error));
-
     fetch(
       'https://api.themoviedb.org/3/genre/movie/list?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&language=en-US'
     )
@@ -158,8 +131,8 @@ h3 {
   scroll-snap-align: center;
   padding: calc(var(--gutter) / 2 * 1.5);
   margin: 0 0.25rem 0 0;
-  min-width: 45px;
-  max-height: 68px;
+  min-width: 185px;
+  max-height: 278px;
   display: flex;
   flex-direction: column;
   justify-content: center;

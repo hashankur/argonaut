@@ -14,7 +14,7 @@
           &bull; <span> {{ movieShow.vote_average }} </span> &#9733;
         </ion-text>
         <hr />
-        <ion-button fill="clear" @click="clickYoutube">
+        <ion-button fill="clear" @click="clickYoutube()">
           <ion-icon slot="icon-only" name="logo-youtube"></ion-icon>
           <span> &nbsp; Trailer </span>
         </ion-button>
@@ -28,7 +28,7 @@
         <ion-label> {{ movieShow.overview }} </ion-label>
         <hr />
         <ion-chip v-for="(genre, index) in movieShow.genre_ids" :key="index">
-          <ion-label color="primary">{{ getGenre(genre) }}</ion-label>
+          <ion-label color="light">{{ getGenre(genre) }}</ion-label>
         </ion-chip>
       </div>
       <div>
@@ -93,8 +93,7 @@ export default {
       return genres.find((genre) => genre.id === value).name;
     },
     clickYoutube() {
-      this.ytQuery = this.movieShow.title;
-      this.ytQuery.replace(/\s+/g, '+').toLowerCase();
+      this.ytQuery = this.movieShow.title.replace(/\s+/g, '+').toLowerCase();
 
       fetch(
         'https://www.googleapis.com/youtube/v3/search?part=id&q=trailer+' +
@@ -119,7 +118,8 @@ export default {
         .catch((error) => console.error(error));
     },
     addWishlist() {
-      var existingWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+      var existingWishlist =
+        JSON.parse(localStorage.getItem('wishlistMov')) || [];
       if (
         existingWishlist.find(
           (existingWishlist) => existingWishlist.title === this.movieShow.title
@@ -134,7 +134,7 @@ export default {
       } else {
         const addToWishlist = this.movieShow;
         existingWishlist.push(addToWishlist);
-        localStorage.setItem('wishlist', JSON.stringify(existingWishlist));
+        localStorage.setItem('wishlistMov', JSON.stringify(existingWishlist));
         const toast = document.createElement('ion-toast');
         toast.message = 'Added to wishlist';
         toast.duration = 2000;
@@ -142,6 +142,12 @@ export default {
         document.body.appendChild(toast);
         return toast.present();
       }
+    },
+    inWishlist() {
+      return {
+        primary: this.content['cravings'],
+        success: !this.content['cravings']
+      };
     }
   },
   filters: {

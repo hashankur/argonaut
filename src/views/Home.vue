@@ -7,7 +7,7 @@
     </ion-header>
     <ion-content padding color="dark">
       <ion-list-header>
-        <ion-label>Upcoming - In Theatres</ion-label>
+        <ion-label color="secondary">Upcoming - In Theatres</ion-label>
         <ion-button
           color="dark"
           fill="outline"
@@ -31,7 +31,7 @@
       </div>
 
       <ion-list-header>
-        <ion-label>Trending</ion-label>
+        <ion-label color="secondary">Trending</ion-label>
         <ion-button
           color="dark"
           fill="outline"
@@ -55,7 +55,7 @@
       </div>
 
       <ion-list-header>
-        <ion-label>Popular Movies</ion-label>
+        <ion-label color="secondary">Popular Movies</ion-label>
         <ion-button
           color="dark"
           fill="outline"
@@ -79,7 +79,7 @@
       </div>
 
       <ion-list-header>
-        <ion-label>Popular TV</ion-label>
+        <ion-label color="secondary">Popular TV</ion-label>
         <ion-button
           color="dark"
           fill="outline"
