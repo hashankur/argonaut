@@ -10,7 +10,7 @@
             <ion-icon slot="icon-only" name="search"></ion-icon>
           </ion-button>
         </ion-buttons>
-        <ion-title>Wishlist</ion-title>
+        <ion-title>Watchlist</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-fab
@@ -27,7 +27,7 @@
       <div class="placeholder-img" v-show="showImg">
         <ion-img src="img/stuff/clip-list-is-empty.png"></ion-img>
         <p class="placeholder-text">
-          Tap on 'add to watchlist'
+          Tap on <i>add to watchlist </i>
           <ion-icon name="checkmark-circle-outline"></ion-icon>
           to add items to this list
         </p>
@@ -38,7 +38,7 @@
       <ion-item-sliding v-for="(wishMov, i) in watchlistMov" :key="'mov' + i">
         <ion-item color="dark">
           <ion-img
-            class="ion-padding-end ion-padding-bottom thumb"
+            class="ion-padding-end ion-padding-top ion-padding-bottom thumb"
             :src="'https://image.tmdb.org/t/p/w92' + wishMov.poster_path"
           ></ion-img>
           <ion-label>
@@ -64,7 +64,7 @@
       <ion-item-sliding v-for="(wishTV, i) in watchlistTV" :key="'tv' + i">
         <ion-item color="dark">
           <ion-img
-            class="ion-padding-end ion-padding-bottom thumb"
+            class="ion-padding-end ion-padding-top ion-padding-bottom thumb"
             :src="'https://image.tmdb.org/t/p/w92' + wishTV.poster_path"
           ></ion-img>
           <ion-label>
@@ -73,7 +73,7 @@
             </h2>
             <p>
               {{ wishTV.first_air_date | year }} &bull;
-              {{ wishTV.vote_average }}
+              {{ wishTV.vote_average }} &#9733;
             </p>
           </ion-label>
         </ion-item>
@@ -110,7 +110,9 @@ export default {
 
     if (this.watchlistMov == null || this.watchlistTV == null) {
       this.hasContent = false;
-      this.showImg = true;
+      if (this.watchlistMov == null && this.watchlistTV == null) {
+        this.showImg = true;
+      }
     }
   },
   filters: {
@@ -131,7 +133,7 @@ export default {
 .placeholder-img {
   max-height: 50%;
   max-width: 80%;
-  margin: 60px auto;
+  margin: 15vh auto 0px;
   pointer-events: none;
 }
 .placeholder-text {

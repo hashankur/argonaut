@@ -106,6 +106,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: 'Home',
   data() {
@@ -138,139 +139,35 @@ export default {
     localStorage.tvShow = null;
   },
   mounted() {
-    fetch(
-      'https://api.themoviedb.org/3/movie/upcoming?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&language=en-US&page=1'
-    )
-      .then((response) => response.json()) // one extra step
-      .then((data) => {
-        this.upcoming = data.results; // Bcz, JSON gives data from the 'genres' array
-      })
-      // eslint-disable-next-line
-      .catch((error) => console.error(error));
-
-    fetch(
-      'https://api.themoviedb.org/3/trending/movie/day?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb'
-    )
-      .then((response) => response.json()) // one extra step
-      .then((data) => {
-        this.trending = data.results; // Bcz, JSON gives data from the 'results' array
-      })
-      // eslint-disable-next-line
-      .catch((error) => console.error(error));
-
-    fetch(
-      'https://api.themoviedb.org/3/movie/popular?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&language=en-US&page=1'
-    )
-      .then((response) => response.json()) // one extra step
-      .then((data) => {
-        this.popularMovies = data.results; // Bcz, JSON gives data from the 'genres' array
-      })
-      // eslint-disable-next-line
-      .catch((error) => console.error(error));
-
-    fetch(
-      'https://api.themoviedb.org/3/tv/popular?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&language=en-US&page=1'
-    )
-      .then((response) => response.json()) // one extra step
-      .then((data) => {
-        this.popularTV = data.results; // Bcz, JSON gives data from the 'genres' array
-      })
-      // eslint-disable-next-line
-      .catch((error) => console.error(error));
+    axios
+      .all([
+        axios.get(
+          '/movie/upcoming?language=en-US&page=1&api_key=' +
+            process.env.VUE_APP_TMDB
+        ),
+        axios.get(
+          '/trending/movie/day?language=en-US&page=1&api_key=' +
+            process.env.VUE_APP_TMDB
+        ),
+        axios.get(
+          '/movie/popular?language=en-US&page=1&api_key=' +
+            process.env.VUE_APP_TMDB
+        ),
+        axios.get(
+          '/tv/popular?language=en-US&page=1&api_key=' +
+            process.env.VUE_APP_TMDB
+        )
+      ])
+      .then(
+        axios.spread((upcoming, trending, popMov, popTV) => {
+          this.upcoming = upcoming.data.results;
+          this.trending = trending.data.results;
+          this.popularMovies = popMov.data.results;
+          this.popularTV = popTV.data.results;
+        })
+      );
   }
 };
 </script>
 
-<style scoped>
-:root {
-  --gutter: 20px;
-}
-
-.app {
-  padding: var(--gutter) 0;
-  display: grid;
-  grid-gap: var(--gutter) 0;
-  grid-template-columns: var(--gutter) 1fr var(--gutter);
-  align-content: start;
-}
-
-.app > * {
-  grid-column: 2 / -2;
-}
-
-.app > .full {
-  grid-column: 1 / -1;
-}
-
-.hs {
-  display: grid;
-  grid-gap: calc(var(--gutter) / 2);
-  grid-template-columns: 10px;
-  grid-template-rows: minmax(150px, 1fr);
-  grid-auto-flow: column;
-  grid-auto-columns: calc(50% - var(--gutter) * 2);
-
-  overflow-x: scroll;
-  scroll-snap-type: x proximity;
-  padding-bottom: calc(0.75 * var(--gutter));
-  margin-bottom: calc(-0.25 * var(--gutter));
-}
-
-.hs:before,
-.hs:after {
-  content: '';
-  width: 10px;
-}
-
-/* Demo styles */
-
-html,
-body {
-  height: 100%;
-}
-
-body {
-  display: grid;
-  place-items: center;
-  background: #456173;
-}
-
-img {
-  border-radius: 6px;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-h1,
-h2,
-h3 {
-  margin: 0;
-}
-
-.hs > li,
-.item {
-  scroll-snap-align: center;
-  padding: calc(var(--gutter) / 2 * 1.5);
-  margin: 0 0.25rem 0 0;
-  min-width: 92px;
-  max-height: 138px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: #2c3e50;
-  border-radius: 8px;
-}
-
-.no-scrollbar {
-  scrollbar-width: none;
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-</style>
+<style scoped src="@/assets/grid.css"></style>

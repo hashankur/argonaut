@@ -18,18 +18,17 @@ export default {
     SideMenu
   },
   mounted() {
-    let handler = Network.addListener('networkStatusChange', (status) => {
+    Network.addListener('networkStatusChange', (status) => {
       if (status.connected == false) {
         this.presentAlert();
       } else {
         this.networkStatus(
           'You are back online ' + `(${status.connectionType.toUpperCase()})`,
-          'success',
-          'OK'
+          'success'
         );
       }
     });
-    let status = Network.getStatus();
+    Network.getStatus();
   },
   methods: {
     presentAlert() {
@@ -37,13 +36,13 @@ export default {
         .create({
           header: 'You are offline',
           message:
-            "Filmroll requires a working internet connection, which you don't have at the moment.",
+            "Filmroll requires a working internet connection, which you don't have at the moment. \n Please try again.",
           buttons: ['OK'],
           backdropDismiss: false
         })
         .then((a) => a.present());
     },
-    networkStatus(message, color, buttonText) {
+    networkStatus(message, color) {
       const toast = document.createElement('ion-toast');
       toast.message = message;
       toast.color = color;

@@ -25,13 +25,6 @@ export default new IonicVueRouter({
           }
         },
         {
-          path: 'home/:type/:id/cast&reviews',
-          name: 'cast&Reviews',
-          components: {
-            homeRoute: () => import('@/views/Cast&Reviews.vue')
-          }
-        },
-        {
           path: 'discover',
           name: 'discover',
           components: {
@@ -50,20 +43,6 @@ export default new IonicVueRouter({
           name: 'watchlist',
           components: {
             watchlistRoute: () => import('@/views/Watchlist.vue')
-          }
-        },
-        {
-          path: 'people',
-          name: 'people',
-          components: {
-            peopleRoute: () => import('@/views/People.vue')
-          }
-        },
-        {
-          path: 'people/search',
-          name: 'search',
-          components: {
-            peopleRoute: () => import('@/views/Search.vue')
           }
         }
       ]

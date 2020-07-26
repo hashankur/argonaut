@@ -29,7 +29,7 @@ export default {
   name: 'SideMenu',
   methods: {
     shareMovie() {
-      let shareRet = Share.share({
+      Share.share({
         text: 'A simple movie watchlist!',
         url: 'http://adroit24.netlify.app/?ref=argonaut',
         dialogTitle: 'Share with buddies'
