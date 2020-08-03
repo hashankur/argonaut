@@ -25,17 +25,10 @@ export default new IonicVueRouter({
           }
         },
         {
-          path: 'discover',
-          name: 'discover',
+          path: 'home/search',
+          name: 'search',
           components: {
-            discoverRoute: () => import('@/views/Discover.vue')
-          }
-        },
-        {
-          path: 'discover/popular',
-          name: 'popular',
-          components: {
-            discoverRoute: () => import('@/views/Popular.vue')
+            homeRoute: () => import('@/views/Search.vue')
           }
         },
         {

@@ -107,6 +107,8 @@
 
 <script>
 import axios from 'axios';
+import { Plugins } from '@capacitor/core';
+const { App } = Plugins;
 export default {
   name: 'Home',
   data() {
@@ -132,30 +134,60 @@ export default {
         name: 'details',
         params: { type: 'tv', id, name, selectedTV }
       });
+    },
+    showExitConfirm() {
+      this.alertController
+        .create({
+          header: 'App termination',
+          message: 'Do you want to close the app?',
+          backdropDismiss: false,
+          buttons: [
+            {
+              text: 'Stay',
+              role: 'cancel',
+              handler: () => {
+                console.log('Application exit prevented!');
+              }
+            },
+            {
+              text: 'Exit',
+              handler: () => {
+                navigator['app'].exitApp();
+              }
+            }
+          ]
+        })
+        .then((alert) => {
+          alert.present();
+        });
     }
   },
   created() {
     localStorage.movieShow = null;
     localStorage.tvShow = null;
+
+    App.addListener('backButton', function () {
+      this.showExitConfirm();
+    });
   },
   mounted() {
+    let config = 'language=en-US&page=1';
     axios
       .all([
         axios.get(
-          '/movie/upcoming?language=en-US&page=1&api_key=' +
+          '/movie/upcoming?' + config + '&api_key=' + process.env.VUE_APP_TMDB
+        ),
+        axios.get(
+          '/trending/movie/day?' +
+            config +
+            '&api_key=' +
             process.env.VUE_APP_TMDB
         ),
         axios.get(
-          '/trending/movie/day?language=en-US&page=1&api_key=' +
-            process.env.VUE_APP_TMDB
+          '/movie/popular?' + config + '&api_key=' + process.env.VUE_APP_TMDB
         ),
         axios.get(
-          '/movie/popular?language=en-US&page=1&api_key=' +
-            process.env.VUE_APP_TMDB
-        ),
-        axios.get(
-          '/tv/popular?language=en-US&page=1&api_key=' +
-            process.env.VUE_APP_TMDB
+          '/tv/popular?' + config + '&api_key=' + process.env.VUE_APP_TMDB
         )
       ])
       .then(

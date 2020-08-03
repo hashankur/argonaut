@@ -19,6 +19,7 @@ export default {
   },
   mounted() {
     Network.addListener('networkStatusChange', (status) => {
+      Network.getStatus();
       if (status.connected == false) {
         this.presentAlert();
       } else {
@@ -28,7 +29,6 @@ export default {
         );
       }
     });
-    Network.getStatus();
   },
   methods: {
     presentAlert() {
@@ -46,7 +46,7 @@ export default {
       const toast = document.createElement('ion-toast');
       toast.message = message;
       toast.color = color;
-      toast.duration = 3000;
+      toast.duration = 1000;
       document.body.appendChild(toast);
       return toast.present();
     }

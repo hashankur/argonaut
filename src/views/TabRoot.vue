@@ -5,14 +5,6 @@
         <ion-vue-router name="homeRoute"></ion-vue-router>
       </ion-tab>
 
-      <ion-tab
-        tab="discover"
-        :routes="['discover', 'popular']"
-        :to="{ name: 'discover' }"
-      >
-        <ion-vue-router name="discoverRoute"></ion-vue-router>
-      </ion-tab>
-
       <ion-tab tab="watchlist">
         <ion-vue-router name="watchlistRoute"></ion-vue-router>
       </ion-tab>
@@ -21,11 +13,6 @@
         <ion-tab-button tab="home">
           <ion-icon name="home" />
           <ion-label>Home</ion-label>
-        </ion-tab-button>
-
-        <ion-tab-button tab="discover" :to="{ name: 'discover' }">
-          <ion-icon name="compass" />
-          <ion-label>Discover</ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="watchlist" :to="{ name: 'watchlist' }">

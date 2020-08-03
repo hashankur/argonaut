@@ -16,15 +16,13 @@
           &bull; <span> {{ tvShow.vote_average }} </span> &#9733;
         </ion-text>
         <hr />
-        <ion-button fill="clear" @click="clickYoutube">
-          <ion-icon slot="icon-only" name="logo-youtube"></ion-icon>
-          <span> &nbsp; Trailer </span>
+        <ion-button fill="clear" @click="clickYoutube()">
+          <ion-icon slot="start" name="logo-youtube"></ion-icon>
+          <ion-label> Trailer </ion-label>
         </ion-button>
-        <ion-button fill="clear" @click="onClick()">
-          <ion-icon slot="icon-only" name="share"></ion-icon>
-        </ion-button>
-        <ion-button fill="clear" @click="addWishlist">
-          <ion-icon slot="icon-only" name="checkmark-circle-outline"></ion-icon>
+        <ion-button fill="clear" @click="addWishlist()">
+          <ion-icon slot="start" name="checkmark-circle-outline"></ion-icon>
+          <ion-label> Watchlist </ion-label>
         </ion-button>
         <hr />
         <ion-label> {{ tvShow.overview }} </ion-label>
@@ -118,7 +116,7 @@ export default {
       ) {
         const toast = document.createElement('ion-toast');
         toast.message = 'Already in watchlist';
-        toast.duration = 2000;
+        toast.duration = 1000;
         toast.color = 'danger';
         document.body.appendChild(toast);
         return toast.present();
@@ -128,7 +126,7 @@ export default {
         localStorage.setItem('watchlistTV', JSON.stringify(existingWishlist));
         const toast = document.createElement('ion-toast');
         toast.message = 'Added to watchlist';
-        toast.duration = 2000;
+        toast.duration = 1000;
         toast.color = 'primary';
         document.body.appendChild(toast);
         return toast.present();

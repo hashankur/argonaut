@@ -6,12 +6,18 @@
   "webDir": "dist",
   "plugins": {
     "SplashScreen": {
-      "launchShowDuration": 2
+      "launchShowDuration": 2000,
+      "splashFullScreen": true,
+      "splashImmersive": false,
+      "backgroundColor": "#1b1d33",
+      "showSpinner": true,
+      "androidSpinnerStyle": "small",
+      "spinnerColor": "#1b1d33ff"
     }
   },
   "cordova": {},
   "linuxAndroidStudioPath": "/home/adroit/.local/share/flatpak/app/com.google.AndroidStudio/x86_64/stable/a7e47728c79f10310dda8ede8c31feacf8f1c4b7e05196c1f96f82aaf300d9f5/files/extra/android-studio/bin/studio.sh",
   "android": {
-    "backgroundColor": "#00000000"
+    "backgroundColor": "#222428ff"
   }
 }
